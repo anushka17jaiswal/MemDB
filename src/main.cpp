@@ -37,6 +37,14 @@ if (command == "SET")
 
     std::cout << "OK" << std::endl;
 }
+else if (command == "GET")
+{
+    std::string key;
+
+    ss >> key;
+
+    std::cout << db.get(key) << std::endl;
+}
     }
 
     std::cout << "Goodbye!" << std::endl;
