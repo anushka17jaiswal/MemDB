@@ -2,19 +2,37 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-Database::Database()
+Database::Database() : cache(3)
 {
 }
 void Database::set(const std::string &key, const std::string &value)
 {
     store[key] = value;
+
+    auto evicted = cache.put(key);
+
+    if (evicted)
+    {
+        store.erase(*evicted);
+        expiry.erase(*evicted);
+    }
 }
-void Database::set(const std::string &key, const std::string &value, int ttlSeconds)
+void Database::set(const std::string &key,
+                   const std::string &value,
+                   int ttlSeconds)
 {
     store[key] = value;
     expiry[key] = std::time(nullptr) + ttlSeconds;
+
+    auto evicted = cache.put(key);
+
+    if (evicted)
+    {
+        store.erase(*evicted);
+        expiry.erase(*evicted);
+    }
 }
-std::string Database::get(const std::string &key) const
+std::string Database::get(const std::string &key)
 {
     auto it = store.find(key);
 
@@ -33,7 +51,9 @@ std::string Database::get(const std::string &key) const
         }
     }
 
-    return it->second;
+   cache.put(key);
+
+return it->second;
 }
 bool Database::exists(const std::string &key) const
 {
