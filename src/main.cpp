@@ -5,7 +5,8 @@
 int main()
 {
     Database db;
-    Server server;
+Server server(db);
+
 server.start();
     db.loadFromFile("data/database.db");
 
