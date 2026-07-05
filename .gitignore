@@ -1,0 +1,16 @@
+# Build files
+build/
+
+# macOS
+.DS_Store
+
+# Object files
+*.o
+*.out
+*.exe
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
