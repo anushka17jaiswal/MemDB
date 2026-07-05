@@ -1,0 +1,3 @@
+/Users/nush1/MemDB/build/CMakeFiles/memdb.dir
+/Users/nush1/MemDB/build/CMakeFiles/edit_cache.dir
+/Users/nush1/MemDB/build/CMakeFiles/rebuild_cache.dir
